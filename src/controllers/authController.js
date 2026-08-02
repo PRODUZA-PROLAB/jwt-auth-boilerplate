@@ -1,3 +1,9 @@
+/**
+ * HTTP handlers for the authentication routes.
+ *
+ * @module controllers/authController
+ */
+
 import {
   register as registerUser,
   login,
@@ -8,10 +14,24 @@ import { handle } from '../utils/asyncHandler.js';
 const REFRESH_COOKIE = 'refreshToken';
 const REFRESH_PATH = '/auth/refresh';
 
+/**
+ * Extracts the refresh token from the request cookies or body.
+ *
+ * @param {object} req - The Express request object.
+ * @returns {string|undefined} The refresh token, if present.
+ */
 function extractRefreshToken(req) {
   return req.cookies?.[REFRESH_COOKIE] ?? req.body?.refreshToken;
 }
 
+/**
+ * Sets the HTTP-only refresh token cookie on the response.
+ *
+ * @param {object} res - The Express response object.
+ * @param {string} token - The refresh token to store in the cookie.
+ * @param {object} env - The environment config used to derive cookie flags.
+ * @returns {void}
+ */
 function setRefreshCookie(res, token, env) {
   res.cookie(REFRESH_COOKIE, token, {
     httpOnly: true,
@@ -22,6 +42,15 @@ function setRefreshCookie(res, token, env) {
   });
 }
 
+/**
+ * Creates the auth controller with handlers bound to the given env and store.
+ *
+ * @param {object} deps - Controller dependencies.
+ * @param {object} deps.env - The environment config.
+ * @param {object} deps.store - The user store instance.
+ * @returns {object} Object of Express handlers: `register`, `login`, `refresh`,
+ *   `logout`, and `me`.
+ */
 export function createAuthController({ env, store }) {
   return {
     register: handle((req, res) => {

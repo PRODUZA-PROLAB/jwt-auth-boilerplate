@@ -1,5 +1,20 @@
+/**
+ * Express middleware that protects routes with a valid access token.
+ *
+ * @module middleware/authenticate
+ */
+
 import { verifyAccessToken } from '../services/tokenService.js';
 
+/**
+ * Builds the authentication middleware factory.
+ *
+ * @param {object} env - The environment config with JWT secrets.
+ * @param {object} store - The user store used to resolve the token subject.
+ * @returns {Function} Express middleware. Validates the `Authorization:
+ *   Bearer <token>` header, loads the user, and attaches `req.user`. Responds
+ *   with HTTP 401 when the token is missing, invalid, or the user is unknown.
+ */
 export function authenticate(env, store) {
   return (req, res, next) => {
     const header = req.headers.authorization ?? '';

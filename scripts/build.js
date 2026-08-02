@@ -1,3 +1,9 @@
+/**
+ * Build script. Syntax-checks every `.js` file under `src/` with `node --check`.
+ *
+ * @module scripts/build
+ */
+
 import { readdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
@@ -8,6 +14,13 @@ const srcDir = join(root, 'src');
 
 const files = [];
 
+/**
+ * Recursively collects `.js` files under a directory into the shared `files`
+ * array.
+ *
+ * @param {string} dir - The directory to walk.
+ * @returns {void}
+ */
 function walk(dir) {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = join(dir, entry.name);

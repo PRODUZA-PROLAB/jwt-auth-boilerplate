@@ -1,3 +1,9 @@
+/**
+ * Application entry point. Boots the server and starts listening.
+ *
+ * @module index
+ */
+
 import { env } from './config/env.js';
 import { createApp } from './app.js';
 

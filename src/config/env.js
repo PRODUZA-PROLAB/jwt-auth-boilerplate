@@ -1,8 +1,26 @@
+/**
+ * Environment configuration loader.
+ *
+ * @module config/env
+ */
+
 import crypto from 'node:crypto';
 import { parseDuration } from '../utils/parseDuration.js';
 
 const REQUIRED_IN_PRODUCTION = ['JWT_ACCESS_SECRET', 'JWT_REFRESH_SECRET'];
 
+/**
+ * Reads and validates environment variables, deriving a normalized config
+ * object with JWT and password settings.
+ *
+ * @returns {object} The environment config:
+ *   - `nodeEnv` {string} - The `NODE_ENV` value, defaulting to `"development"`.
+ *   - `isProduction` {boolean} - Whether `NODE_ENV` is `"production"`.
+ *   - `port` {number} - The HTTP port, defaulting to `3000`.
+ *   - `jwt` {object} - Access/refresh secrets and TTLs (string and milliseconds).
+ *   - `password` {object} - `pepper` used to hash passwords.
+ * @throws {Error} When a required variable is missing in production.
+ */
 function readEnv() {
   const nodeEnv = process.env.NODE_ENV ?? 'development';
   const isProduction = nodeEnv === 'production';

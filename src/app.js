@@ -1,9 +1,24 @@
+/**
+ * Express application factory for the JWT auth boilerplate.
+ *
+ * @module app
+ */
+
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import { env as defaultEnv } from './config/env.js';
 import { UserStore } from './store/userStore.js';
 import { createAuthRouter } from './routes/authRoutes.js';
 
+/**
+ * Builds the Express application with health check, auth routes, and global
+ * error handling.
+ *
+ * @param {object} [deps] - Optional dependencies for the app.
+ * @param {object} [deps.env=defaultEnv] - The resolved environment config.
+ * @param {UserStore} [deps.store] - The user store instance.
+ * @returns {object} The configured Express `app`.
+ */
 export function createApp({ env = defaultEnv, store = new UserStore() } = {}) {
   const app = express();
   app.disable('x-powered-by');
