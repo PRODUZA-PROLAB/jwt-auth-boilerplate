@@ -1,0 +1,34 @@
+# Dependências
+node_modules/
+
+# Build
+dist/
+build/
+coverage/
+
+# Ambientes — NUNCA commitar .env
+.env
+.env.*
+.env.local
+.env.production
+.env.development
+.env.staging
+
+# Chaves e segredos
+*.key
+*.p12
+*.jks
+*.keystore
+credentials.json
+service-account.json
+firebase-*.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema
+.DS_Store
+
+# TypeScript (caso o projeto migre para TS)
+*.tsbuildinfo

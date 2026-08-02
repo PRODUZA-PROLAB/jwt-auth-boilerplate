@@ -1,0 +1,33 @@
+{
+  "name": "jwt-auth-boilerplate",
+  "version": "1.0.0",
+  "description": "Boilerplate de autenticação JWT para Node.js/Express: registro, login, access token + refresh token rotativo, proteção de rotas e logout.",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "build": "node scripts/build.js",
+    "lint": "node scripts/build.js && node --check test/index.js && node --check test/smoke.test.mjs",
+    "test": "node --test test/"
+  },
+  "keywords": [
+    "jwt",
+    "auth",
+    "authentication",
+    "express",
+    "refresh-token",
+    "boilerplate",
+    "nodejs"
+  ],
+  "author": "Alex Cavalcante",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
